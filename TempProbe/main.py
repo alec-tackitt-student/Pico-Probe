@@ -1,23 +1,17 @@
 import network
 import socket
 import time
-from machine import Pin, I2C, deepsleep
+from machine import Pin, I2C
 from bmp280 import *
 import gc
 gc.collect()
 
-
-# Initialize onboard LED and I2C for BMP280
-led_onboard = Pin("LED", Pin.OUT)
-i2c = I2C(0, sda=Pin(0), scl=Pin(1), freq=50 * 1000)
-
-# Initialize BMP280 sensor
-bmp = BMP280(i2c)
-bmp.use_case(BMP280_CASE_INDOOR)
-
-# Wi-Fi Network Credentials
 ssid = 'baradur24'  # Replace with your Wi-Fi SSID
 password = '#Anfwtbtitft'  # Replace with your Wi-Fi password
+
+led_onboard = Pin("LED", Pin.OUT)
+i2c = I2C(0, sda = Pin(0), scl = Pin(1), freq = 1000000)
+#bmp = BMP280(i2c)
 
 #Connect to WLAN
 wlan = network.WLAN(network.STA_IF)
@@ -32,14 +26,10 @@ print('Connection successful')
 print(f'Connected on {ip}')
 led_onboard.value(0)
 
-
-
-
-# Web Page Content
 def web_page():
     #Sensor Configuration
     bmp = BMP280(i2c)
-    bmp.use_case(BMP280_CASE_INDOOR)
+    bmp.use_case(BMP280_CASE_WEATHER)    
     pres = bmp.pressure
     p_bar = pres/100000
     p_mmHg = pres/133.3224
@@ -182,8 +172,6 @@ def web_page():
 </body>
 </html>"""
     return html
-
-
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.bind(('', 80))
