@@ -6,21 +6,22 @@ from bmp280 import *
 import gc
 gc.collect()
 
-ssid = 'baradur24'  # Replace with your Wi-Fi SSID
-password = '#Anfwtbtitft'  # Replace with your Wi-Fi password
+ssid = 'CTC'  # Replace with your Wi-Fi SSID
+password = ''  # Replace with your Wi-Fi password
 
 led_onboard = Pin("LED", Pin.OUT)
 i2c = I2C(0, sda = Pin(0), scl = Pin(1), freq = 1000000)
-#bmp = BMP280(i2c)
+bmp = BMP280(i2c)
 
 #Connect to WLAN
 wlan = network.WLAN(network.STA_IF)
 wlan.active(True)
-wlan.connect(ssid, password)
+wlan.connect(ssid)
 while wlan.isconnected() == False:
     led_onboard.value(1)
     print('Connecting...')
     time.sleep(1)
+    led_onboard.value(0)
 ip = wlan.ifconfig()[0]
 print('Connection successful')
 print(f'Connected on {ip}')
@@ -33,7 +34,7 @@ def web_page():
     pres = bmp.pressure
     p_bar = pres/100000
     p_mmHg = pres/133.3224
-    temp = bmp.temperature
+    temp = bmp.temperature - 4
     temp_c2f= (temp * (9/5) + 32)
     temp_f= "{:.2f}".format(temp_c2f)
     pres_p = "{:.2f}".format(pres)
