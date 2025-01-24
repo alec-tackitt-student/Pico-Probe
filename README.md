@@ -1,4 +1,21 @@
 # Raspberry Pi Pico W Temperature Monitor
+## Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Hardware Components](#hardware-components)
+- [Software Requirements](#software-requirements)
+- [Project Setup](#project-setup)
+  - [Hardware Assembly](#1-hardware-assembly)
+  - [Software Installation](#2-software-installation-if-using-vscode)
+- [Using the Project](#using-the-project)
+- [Updating the Project](#updating-the-project)
+- [Future Development](#future-development)
+- [3D Models](#3d-models)
+- [Repository Structure](#repository-structure)
+- [Contributing](#contributing)
+- [License](#license)
+
 
 ## Overview
 This project is a temperature monitoring system built using a Raspberry Pi Pico W and a BMP280-3.3 High-Precision Barometric Pressure Module. The project includes 3D-printed components for housing, MicroPython code for data handling, and detailed instructions for setup and use. The goal is to provide a way to view the tempature of the door, and the goal of this repository is to enable future maintenence and upgrades.
